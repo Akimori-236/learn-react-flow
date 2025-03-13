@@ -20,6 +20,7 @@ export const initialNodes = [
         component: DiamondNode,
         position: { x: 600, y: 0 },
         data: { label: 'Yes/No Decision' },
+        style: { backgroundColor: 'yellow', color: 'black', borderRadius: '10px' },
     },
     {
         id: 'ifYes',
