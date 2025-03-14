@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reactflow/node-resizer": "^2.2.14",
     "@xyflow/react": "^12.4.4",
-    "learn-react-flow": "file:",
+    "learn-react-flow": "file:.",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "reactflow": "^11.11.4",
     "reactstrap": "^9.2.3"
   },
   "devDependencies": {

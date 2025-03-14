@@ -1,4 +1,4 @@
-export default function CustomDiamondNode() {
+export default function DiamondNode() {
     return (
         <svg width="40" height="60">
             <rect x="10" y="0" width="20" height="30" rx="5" />
