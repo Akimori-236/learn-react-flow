@@ -2,6 +2,7 @@ import FlowEdge from "../classes/FlowEdge";
 import FlowNode from "../classes/FlowNode";
 import CircleNode from "./customNodes/CircleNode";
 import DiamondNode from "./customNodes/DiamondNode";
+import GroupNode from "./customNodes/GroupNode";
 
 
 export const initialNodes = [
@@ -11,7 +12,8 @@ export const initialNodes = [
     new FlowNode("4", "If Yes", { x: 500, y: -100 }, "output"),
     new FlowNode("5", "Do Something", { x: 700, y: -100 }, "default"),
     new FlowNode("6", "If No", { x: 500, y: 100 }, "output"),
-]
+    new FlowNode("7", "Group", { x: 200, y: 200 }, "group", GroupNode), // Add a GroupNode to your flow
+];
 
 export const initialEdges = [
     new FlowEdge('e1', '1', '2'),  // From 'Start' to 'Step 1'
