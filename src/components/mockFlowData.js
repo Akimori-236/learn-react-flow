@@ -8,6 +8,7 @@ const NodeType = {
     OUTPUT: "output",
     GROUP: "group",
     DIAMOND: "diamond",
+    CIRCLE: "circle",
 };
 
 // Function to create nodes with flexibility for type and label

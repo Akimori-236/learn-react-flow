@@ -1,7 +1,9 @@
 import { Handle } from "@xyflow/react";
 
 
-export default function DiamondNode({ id, label }) {
+export default function DiamondNode({ id, data }) {
+    const { label } = data;
+
     return (
         <div style={{
             position: 'relative',
@@ -23,7 +25,11 @@ export default function DiamondNode({ id, label }) {
                 transform: 'rotate(45deg)', // Rotate the node to make it diamond-shaped
                 transformOrigin: 'center',
             }}>
-                <div>{label}</div>
+                <div
+                    style={{
+                        transform: 'rotate(315deg)', // Rotate the node to make it diamond-shaped
+                    }}
+                >{label}</div>
             </div>
 
             {/* Outgoing connection points (top and bottom) */}

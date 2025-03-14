@@ -1,7 +1,6 @@
 import { Handle } from "@xyflow/react";
 
 export default function CircleNode({ id, data }) {
-    // Destructure id and label from data prop
     const { label } = data;
 
     const commonStyles = {
