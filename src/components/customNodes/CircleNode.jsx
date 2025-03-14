@@ -1,41 +1,68 @@
-import React, { memo } from "react";
-import { Handle } from "reactflow";
+import { Handle } from "@xyflow/react";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export default memo(({ data, isConnectable }) => {
-    return (
-        <div
-            style={{
-                width: "150px",
-                height: "150px",
-                borderRadius: "50%",
-                background: "#CCCCCC",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                position: "relative", // Ensures handles stay in the right position
-            }}
-        >
-            {/* Target handle for connections */}
-            <Handle
-                type="target"
-                position="left"
-                style={{ background: "#555" }}
-                onConnect={(params) => console.log("handle onConnect", params)}
-                isConnectable={isConnectable}
-            />
+export default function CircleNode({ id, data }) {
+    // Destructure id and label from data prop
+    const { label } = data;
 
-            {/* Display label */}
-            <div>{data.label}</div>
+    const commonStyles = {
+        position: 'relative',
+        width: '150px',  // Width of the circle
+        height: '150px', // Height of the circle (same as width to make it round)
+        borderRadius: '50%',  // Make the node circular
+        backgroundColor: 'lightblue',  // Circle color
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',  // Center the label inside the circle
+        boxSizing: 'border-box',
+        zIndex: 1,  // Ensure circle node is above the label if necessary
+    };
 
-            {/* Source handle for connections */}
-            <Handle
-                type="source"
-                position="right"
-                id="a"
-                style={{ background: "#555" }}
-                isConnectable={isConnectable}
-            />
-        </div>
-    );
-});
+    const labelStyles = {
+        fontSize: '18px',  // Increase font size for better visibility
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'black',  // Label color
+        zIndex: 2,  // Ensure label is on top of the circle node
+        position: 'absolute',
+    };
+
+    if (label.toUpperCase() === "START") {
+        return (
+            <div style={commonStyles}>
+                <div style={labelStyles}>{label}</div>
+                <Handle
+                    type="source"
+                    position="right"
+                    id={`right-${id}`}
+                    style={{
+                        background: '#555',
+                        right: '-12px',  // Adjust for correct placement
+                    }}
+                />
+            </div>
+        );
+    }
+    else if (label.toUpperCase() === "END") {
+        return (
+            <div style={commonStyles}>
+                <div style={labelStyles}>{label}</div>
+                <Handle
+                    type="target"
+                    position="left"
+                    id={`left-${id}`}
+                    style={{
+                        background: '#555',
+                        left: '-12px',  // Adjust for correct placement
+                    }}
+                />
+            </div>
+        );
+    }
+    else {
+        return (
+            <div style={commonStyles}>
+                <div style={labelStyles}>{label}</div>
+            </div>
+        );
+    }
+}

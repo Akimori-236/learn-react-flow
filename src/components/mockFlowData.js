@@ -2,17 +2,18 @@
 import CircleNode from "./customNodes/CircleNode";
 import DiamondNode from "./customNodes/DiamondNode";
 
-const NodeTypes = {
+const NodeType = {
     DEFAULT: "default",
     INPUT: "input",
     OUTPUT: "output",
     GROUP: "group",
+    DIAMOND: "diamond",
 };
 
 // Function to create nodes with flexibility for type and label
-function createNode(id, label, type = NodeTypes.DEFAULT) {
+function createNode(id, label, type = NodeType.DEFAULT) {
     // Ensure the type is valid
-    if (!Object.values(NodeTypes).includes(type)) {
+    if (!Object.values(NodeType).includes(type)) {
         throw new Error(`Invalid node type: ${type}`);
     }
     return {
@@ -29,7 +30,8 @@ function createNode(id, label, type = NodeTypes.DEFAULT) {
 export const initialNodes = [
     {
         id: '1',
-        type: "input",
+        type: "circle",
+        component: CircleNode,
         position: { x: 200, y: 100 },
         data: { label: 'Start' },
         sourcePosition: "right", // outgoing
@@ -38,9 +40,9 @@ export const initialNodes = [
     {
         id: '3',
         type: 'diamond',  // Register 'diamond' as a custom type
+        component: DiamondNode,  // Link the custom component
         position: { x: 600, y: 0 },
         data: { label: 'Yes/No Decision' },
-        component: DiamondNode,  // Link the custom component
     },
     {
         id: 'ifYes',
