@@ -1,8 +1,61 @@
-export default function DiamondNode() {
+import { Handle } from "@xyflow/react";
+
+
+export default function DiamondNode({ id, label }) {
     return (
-        <svg width="40" height="60">
-            <rect x="10" y="0" width="20" height="30" rx="5" />
-            <rect x="20" y="0" width="20" height="30" rx="5" transform="rotate(-45 25 15)" />
-        </svg>
+        <div style={{
+            position: 'relative',
+            width: '150px',  // Width of the diamond
+            height: '150px', // Height of the diamond
+            transform: 'rotate(45deg)', // Rotate the node to make it diamond-shaped
+            transformOrigin: 'center',
+        }}>
+            {/* Node body - the actual diamond shape */}
+            <div style={{
+                backgroundColor: 'yellow',
+                color: 'black',
+                borderRadius: '10px',
+                padding: '20px',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center', // Center the label inside the diamond
+                boxSizing: 'border-box',
+            }}>
+                <div>{label}</div>
+            </div>
+
+            {/* Outgoing connection points (top and bottom) */}
+            <Handle
+                type="source"
+                position="top"
+                id={`top-${id}`}
+                style={{
+                    background: '#555',
+                    top: '-12px',
+                }}
+            />
+            <Handle
+                type="source"
+                position="bottom"
+                id={`bottom-${id}`}
+                style={{
+                    background: '#555',
+                    bottom: '-12px',
+                }}
+            />
+
+            {/* Incoming connection point (left) */}
+            <Handle
+                type="target"
+                position="left"
+                id={`left-${id}`}
+                style={{
+                    background: '#555',
+                    left: '-12px',
+                }}
+            />
+        </div>
     );
 }

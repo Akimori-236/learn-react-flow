@@ -12,12 +12,16 @@ import '@xyflow/react/dist/style.css';
 import React, { useCallback, useEffect } from 'react';
 import { initialEdges, initialNodes } from './components/mockFlowData';
 import CircleNode from "./components/customNodes/CircleNode";
+import DiamondNode from "./components/customNodes/DiamondNode";
+
 
 const connectionLineStyle = { stroke: "#fff" };
 const snapGrid = [20, 20];
 const nodeTypes = {
+  diamond: DiamondNode,
   circle: CircleNode
 };
+
 
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -29,46 +33,8 @@ export default function App() {
   );
 
   useEffect(() => {
-    setNodes([
-      {
-        id: "1",
-        type: "input",
-        data: { label: "An input node" },
-        position: { x: 0, y: 50 },
-        sourcePosition: "right"
-      },
-      {
-        id: "2",
-        type: "circle",
-        data: { label: "circle node" },
-        position: { x: 300, y: 50 }
-      },
-      {
-        id: "3",
-        type: "output",
-        data: { label: "Output A" },
-        position: { x: 650, y: 25 },
-        targetPosition: "left"
-      }
-    ]);
-
-    setEdges([
-      {
-        id: "e1-2",
-        source: "1",
-        target: "2",
-        animated: true,
-        style: { stroke: "#fff" }
-      },
-      {
-        id: "e2a-3",
-        source: "2",
-        target: "3",
-        sourceHandle: "a",
-        animated: true,
-        style: { stroke: "#fff" }
-      }
-    ]);
+    setNodes(initialNodes);
+    setEdges(initialEdges);
   }, [setEdges, setNodes]);
 
   return (
