@@ -1,12 +1,13 @@
-import '@xyflow/react/dist/style.css';
-import React from 'react';
-import FlowProvider from './components/ReactFlowProvider';
-
+import FlowCanvas from "./components/FlowCanvas";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function App() {
 
 
   return (
-    <FlowProvider />
+    <DndProvider backend={HTML5Backend}>
+      <FlowCanvas />
+    </DndProvider>
   );
 }
