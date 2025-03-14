@@ -7,8 +7,6 @@ export default function DiamondNode({ id, label }) {
             position: 'relative',
             width: '150px',  // Width of the diamond
             height: '150px', // Height of the diamond
-            transform: 'rotate(45deg)', // Rotate the node to make it diamond-shaped
-            transformOrigin: 'center',
         }}>
             {/* Node body - the actual diamond shape */}
             <div style={{
@@ -22,6 +20,8 @@ export default function DiamondNode({ id, label }) {
                 justifyContent: 'center',
                 alignItems: 'center', // Center the label inside the diamond
                 boxSizing: 'border-box',
+                transform: 'rotate(45deg)', // Rotate the node to make it diamond-shaped
+                transformOrigin: 'center',
             }}>
                 <div>{label}</div>
             </div>
