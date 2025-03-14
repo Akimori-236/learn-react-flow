@@ -5,8 +5,8 @@ export default function CircleNode({ id, data }) {
 
     const commonStyles = {
         position: 'relative',
-        width: '150px',  // Width of the circle
-        height: '150px', // Height of the circle (same as width to make it round)
+        width: '75px',  // Width of the circle
+        height: '75px', // Height of the circle (same as width to make it round)
         borderRadius: '50%',  // Make the node circular
         backgroundColor: 'lightblue',  // Circle color
         display: 'flex',
@@ -35,7 +35,7 @@ export default function CircleNode({ id, data }) {
                     id={`right-${id}`}
                     style={{
                         background: '#555',
-                        right: '-12px',  // Adjust for correct placement
+                        right: '0px',  // Adjust for correct placement
                     }}
                 />
             </div>
@@ -51,7 +51,7 @@ export default function CircleNode({ id, data }) {
                     id={`left-${id}`}
                     style={{
                         background: '#555',
-                        left: '-12px',  // Adjust for correct placement
+                        left: '0px',  // Adjust for correct placement
                     }}
                 />
             </div>

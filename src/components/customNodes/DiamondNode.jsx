@@ -7,8 +7,8 @@ export default function DiamondNode({ id, data }) {
     return (
         <div style={{
             position: 'relative',
-            width: '150px',  // Width of the diamond
-            height: '150px', // Height of the diamond
+            width: '100px',  // Width of the diamond
+            height: '100px', // Height of the diamond
         }}>
             {/* Node body - the actual diamond shape */}
             <div style={{

@@ -12,7 +12,7 @@ const NodeType = {
 };
 
 // Function to create nodes with flexibility for type and label
-function createNode(id, label, type = NodeType.DEFAULT) {
+function createNode(id, label, position, type = NodeType.DEFAULT) {
     // Ensure the type is valid
     if (!Object.values(NodeType).includes(type)) {
         throw new Error(`Invalid node type: ${type}`);
@@ -20,7 +20,7 @@ function createNode(id, label, type = NodeType.DEFAULT) {
     return {
         id: id,
         type: type,  // Dynamically set the node type
-        position: { x: 200, y: 100 },
+        position: position,
         data: { label: label },
         sourcePosition: "right",  // outgoing
         targetPosition: "left",   // incoming
@@ -33,35 +33,35 @@ export const initialNodes = [
         id: '1',
         type: "circle",
         component: CircleNode,
-        position: { x: 200, y: 100 },
+        position: { x: 0, y: 0 },
         data: { label: 'Start' },
         sourcePosition: "right", // outgoing
     },
-    createNode("2", "Step 1"),
+    createNode("2", "Step 1", { x: 100, y: 0 }),
     {
         id: '3',
         type: 'diamond',  // Register 'diamond' as a custom type
         component: DiamondNode,  // Link the custom component
-        position: { x: 600, y: 0 },
+        position: { x: 300, y: 0 },
         data: { label: 'Yes/No Decision' },
     },
     {
         id: 'ifYes',
         type: "output",
-        position: { x: 700, y: -50 },
+        position: { x: 500, y: -100 },
         data: { label: 'If Yes' },
         targetPosition: "left"
     },
     {
         id: 'doSomething',
-        position: { x: 500, y: -150 },
+        position: { x: 700, y: -100 },
         data: { label: 'Do Something' },
 
     },
     {
         id: 'ifNo',
         type: "output",
-        position: { x: 800, y: -100 },
+        position: { x: 500, y: 100 },
         data: { label: 'If No' },
         targetPosition: "left"
     },
