@@ -42,19 +42,39 @@ export default function FlowCanvas() {
     }, [setEdges, setNodes]);
 
 
-    function handleNodeDrop(item) {
+    function handleNodeDrop(item, monitor) {
+        const offset = monitor.getClientOffset();
+        const reactFlowContainer = document.querySelector('.react-flow'); // React Flow container
+        const containerBounds = reactFlowContainer.getBoundingClientRect();
+
+        // Adjust for container's position
+        const xPos = offset.x - containerBounds.left;
+        const yPos = offset.y - containerBounds.top;
+
+        // Adjust the Y-position so that y=0 is the center of the container
+        const centerY = containerBounds.height / 2; // Find the center of the container
+        const adjustedY = yPos - centerY;
+
+        // Optionally, apply grid snapping
+        const snappedX = Math.round(xPos/2 / snapGrid[0]) * snapGrid[0];
+        const snappedY = Math.round(adjustedY / snapGrid[1]) * snapGrid[1];
+
         const newNode = {
             id: `${Date.now()}`, // Unique ID for each new node
             type: item.nodeType,  // Node type ("circle", "diamond", etc.)
-            position: { x: 100, y: 100 },  // Position it where you want it initially
+            position: {
+                x: snappedX,  // Apply snapping
+                y: snappedY,  // Apply snapping with adjusted Y to be relative to the center
+            },
             data: { label: item.label },
         };
+
         setNodes((prevNodes) => [...prevNodes, newNode]);
-    };
+    }
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "node",  // Accept nodes from the sidebar
-        drop: (item) => handleNodeDrop(item),
+        drop: (item, monitor) => handleNodeDrop(item, monitor),
         collect: (monitor) => ({
             isOver: monitor.isOver(),
         }),
