@@ -1,75 +1,21 @@
-
+import FlowEdge from "../classes/FlowEdge";
+import FlowNode from "../classes/FlowNode";
 import CircleNode from "./customNodes/CircleNode";
 import DiamondNode from "./customNodes/DiamondNode";
 
-const NodeType = {
-    DEFAULT: "default",
-    INPUT: "input",
-    OUTPUT: "output",
-    GROUP: "group",
-    DIAMOND: "diamond",
-    CIRCLE: "circle",
-};
-
-// Function to create nodes with flexibility for type and label
-function createNode(id, label, position, type = NodeType.DEFAULT) {
-    // Ensure the type is valid
-    if (!Object.values(NodeType).includes(type)) {
-        throw new Error(`Invalid node type: ${type}`);
-    }
-    return {
-        id: id,
-        type: type,  // Dynamically set the node type
-        position: position,
-        data: { label: label },
-        sourcePosition: "right",  // outgoing
-        targetPosition: "left",   // incoming
-    };
-}
-
 
 export const initialNodes = [
-    {
-        id: '1',
-        type: "circle",
-        component: CircleNode,
-        position: { x: 0, y: 0 },
-        data: { label: 'Start' },
-        sourcePosition: "right", // outgoing
-    },
-    createNode("2", "Step 1", { x: 100, y: 0 }),
-    {
-        id: '3',
-        type: 'diamond',  // Register 'diamond' as a custom type
-        component: DiamondNode,  // Link the custom component
-        position: { x: 300, y: 0 },
-        data: { label: 'Yes/No Decision' },
-    },
-    {
-        id: 'ifYes',
-        type: "output",
-        position: { x: 500, y: -100 },
-        data: { label: 'If Yes' },
-        targetPosition: "left"
-    },
-    {
-        id: 'doSomething',
-        position: { x: 700, y: -100 },
-        data: { label: 'Do Something' },
-
-    },
-    {
-        id: 'ifNo',
-        type: "output",
-        position: { x: 500, y: 100 },
-        data: { label: 'If No' },
-        targetPosition: "left"
-    },
-];
+    new FlowNode("1", "Start", { x: 0, y: 0 }, "circle", CircleNode),
+    new FlowNode("2", "Step 1", { x: 100, y: 0 }, "default"),
+    new FlowNode("3", "Yes/No Decision", { x: 300, y: 0 }, "diamond", DiamondNode),
+    new FlowNode("4", "If Yes", { x: 500, y: -100 }, "output"),
+    new FlowNode("5", "Do Something", { x: 700, y: -100 }, "default"),
+    new FlowNode("6", "If No", { x: 500, y: 100 }, "output"),
+]
 
 export const initialEdges = [
-    { id: 'e1', source: 'start', target: 'step1' },
-    { id: 'e2', source: 'step1', target: 'yesNo' },
-    { id: 'e3', source: 'yesNo', target: 'ifYes', style: { stroke: 'green' } }, // for yes
-    { id: 'e4', source: 'yesNo', target: 'ifNo', style: { stroke: 'red' } }, // for no
-];
+    new FlowEdge('e1', '1', '2'),  // From 'Start' to 'Step 1'
+    new FlowEdge('e2', '2', '3'),  // From 'Step 1' to 'Yes/No Decision'
+    new FlowEdge('e3', '3', '4', { stroke: 'green' }),  // Yes path (green)
+    new FlowEdge('e4', '3', '6', { stroke: 'red' }),  // No path (red)
+]
